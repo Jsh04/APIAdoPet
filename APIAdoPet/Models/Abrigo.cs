@@ -19,4 +19,6 @@ public class Abrigo
     [Required]
     public Endereco Endereco { get; set; }
 
+    public virtual ICollection<Pet> Pets { get; set; }
+
 }
