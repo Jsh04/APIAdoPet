@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32901.215
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APIAdoPet", "APIAdoPet\APIAdoPet.csproj", "{435A4720-A448-4DE3-858A-2BC9985DDABD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{435A4720-A448-4DE3-858A-2BC9985DDABD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{435A4720-A448-4DE3-858A-2BC9985DDABD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{435A4720-A448-4DE3-858A-2BC9985DDABD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{435A4720-A448-4DE3-858A-2BC9985DDABD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9FD62F6C-39F8-487B-89AE-F0037A5DFEA9}
+	EndGlobalSection
+EndGlobal
