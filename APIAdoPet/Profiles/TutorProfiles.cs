@@ -2,17 +2,15 @@
 using APIAdoPet.Models.DTO;
 using AutoMapper;
 
-namespace APIAdoPet
+namespace APIAdoPet.Profiles
 {
-    public class TutorProfile : Profile
+    public class TutorProfiles : Profile
     {
-        public TutorProfile()
+        public TutorProfiles()
         {
             CreateMap<CadastrarTutorDTO, Tutor>();
-            CreateMap<Tutor, ListarTutorDTO>();
             CreateMap<AtualizaTutorDTO, Tutor>();
-
+            CreateMap<Tutor, ListarTutorDTO>();
         }
-
     }
 }
