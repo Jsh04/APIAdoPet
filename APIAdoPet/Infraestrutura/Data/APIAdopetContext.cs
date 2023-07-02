@@ -1,7 +1,7 @@
-﻿using APIAdoPet.Models;
+﻿using APIAdoPet.Domains;
 using Microsoft.EntityFrameworkCore;
 
-namespace APIAdoPet.Data;
+namespace APIAdoPet.Infraestrutura.Data;
 
 public class APIAdopetContext : DbContext
 {

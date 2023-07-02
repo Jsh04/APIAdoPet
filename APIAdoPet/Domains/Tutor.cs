@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace APIAdoPet.Models;
+namespace APIAdoPet.Domains;
 
 public class Tutor
 {

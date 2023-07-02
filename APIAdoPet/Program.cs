@@ -1,14 +1,11 @@
-using APIAdoPet.Data;
+using APIAdoPet.Infraestrutura;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var connectionString = builder.Configuration.GetConnectionString("APIAdopetConnection");
+builder.Services.AdicionarInfraestrutura(builder.Configuration);
 // Add services to the container.
-builder.Services.AddDbContext<APIAdopetContext>(opts => opts.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
-
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

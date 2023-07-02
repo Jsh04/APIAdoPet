@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace APIAdoPet.Models.DTO
+namespace APIAdoPet.Domains.DTO.TutorDTO
 {
     public class ListarTutorDTO
     {

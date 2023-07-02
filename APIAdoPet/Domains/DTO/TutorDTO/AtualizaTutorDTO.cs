@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
+using APIAdoPet.Models;
 
-namespace APIAdoPet.Models.DTO
+namespace APIAdoPet.Domains.DTO.TutorDTO
 {
     public class AtualizaTutorDTO
     {

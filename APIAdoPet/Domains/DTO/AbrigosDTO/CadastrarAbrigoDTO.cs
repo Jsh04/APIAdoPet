@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace APIAdoPet.Models.DTO.AbrigosDTO;
+namespace APIAdoPet.Domains.DTO.AbrigosDTO;
 
-public class CadastrarAbrigoDTO { 
+public class CadastrarAbrigoDTO
+{
 
     [Required(ErrorMessage = "Campo nome é obrigatório")]
     [MinLength(3)]

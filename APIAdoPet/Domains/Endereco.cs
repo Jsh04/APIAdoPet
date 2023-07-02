@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Globalization;
 
-namespace APIAdoPet.Models;
+namespace APIAdoPet.Domains;
 
 [Owned]
 public class Endereco

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace APIAdoPet.Models;
+namespace APIAdoPet.Domains;
 
 public class Abrigo
 {
