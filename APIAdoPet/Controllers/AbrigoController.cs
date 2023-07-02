@@ -1,5 +1,6 @@
 ﻿using APIAdoPet.Data;
 using APIAdoPet.Models;
+using APIAdoPet.Models.DTO;
 using APIAdoPet.Models.DTO.AbrigosDTO;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -37,5 +38,13 @@ public class AbrigoController : ControllerBase
             return Ok(_mapper.Map<DadosDetalhamentoAbrigo>(abrigo));
         }
         return BadRequest();
+    }
+
+    [HttpGet]
+    public IEnumerable<DadosDetalhamentoAbrigo> ListarAbrigos([FromQuery] int skip = 0, [FromQuery] int take = 10)
+    {
+        var abrigos = _context.Abrigo.Skip(skip).Take(take);
+        return _mapper.Map<List<DadosDetalhamentoAbrigo>>(abrigos.ToList());
+
     }
 }
