@@ -1,8 +1,9 @@
-﻿using APIAdoPet.Data;
+﻿using APIAdoPet.Infraestrutura.Data;
 using APIAdoPet.Domains.DTO.TutorDTO;
 using APIAdoPet.Domains;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using APIAdoPet.Infraestrutura.Repository;
 
 namespace APIAdoPet.Controllers;
 
@@ -11,36 +12,34 @@ namespace APIAdoPet.Controllers;
 [Route("[controller]")]
 public class TutorController : ControllerBase
 {
-	private readonly APIAdopetContext _context;
+	private readonly TutorRepository _tutorRepository;
 
 	private readonly IMapper _mapper;
 
-	public TutorController(APIAdopetContext context, IMapper mapper)
+	public TutorController(TutorRepository tutorRepository, IMapper mapper)
 	{
-		_context = context;
+		_tutorRepository = tutorRepository;
 		_mapper = mapper;
 	}
 
 	[HttpPost]
-	public IActionResult cadastrarTutor([FromBody] CadastrarTutorDTO tutorDto)
+	public IActionResult CadastrarTutor([FromBody] CadastrarTutorDTO tutorDto)
 	{
 		var tutor = _mapper.Map<Tutor>(tutorDto);
-		_context.Tutores.Add(tutor);
-		_context.SaveChanges();
+		_tutorRepository.CadastrarTutor(tutor);
 		return CreatedAtAction(nameof(PegarTutorPorId), new { id = tutor.Id }, tutor);
 	}
 
 	[HttpGet]
 	public IEnumerable<ListarTutorDTO> ListarTutores([FromQuery] int skip = 0, [FromQuery] int take = 10)
 	{
-		IQueryable<Tutor> tutors = _context.Tutores.Skip(skip).Take(take);	
-		return _mapper.Map<List<ListarTutorDTO>>(tutors.ToList());
+		return _mapper.Map<List<ListarTutorDTO>>(_tutorRepository.ListarTutor(skip, take));
 	}
 
 	[HttpGet("{id}")]
 	public IActionResult PegarTutorPorId(int id)
 	{
-		var tutor = _context.Tutores.FirstOrDefault(tutor => tutor.Id == id);
+		var tutor = _tutorRepository.PegarTutorPorId(id);
 		if (tutor == null) return NotFound();
 		var tutorDTO = _mapper.Map<ListarTutorDTO>(tutor);
 		return Ok(tutorDTO);
@@ -49,22 +48,16 @@ public class TutorController : ControllerBase
 	[HttpPut("{id}")]
 	public IActionResult AtualizarFilme(int id, [FromBody] AtualizaTutorDTO tutorDTO)
 	{
-		var tutor = _context.Tutores.FirstOrDefault(tutor => tutor.Id == id);
-		if(tutor == null) return NotFound();
-		_mapper.Map(tutorDTO, tutor);
-		_context.SaveChanges();
+		var tutor = new Tutor();
+		var tutorRequisicao = _mapper.Map(tutorDTO, tutor);
+		var tutorAtualizado = _tutorRepository.AtualizarTutor(id, tutorRequisicao);
+		if(tutorAtualizado == null) return NotFound();
 		return NoContent();
 	}
 	[HttpDelete("{id}")]
 	public IActionResult DeletarTutor(int id)
 	{
-		var tutor = _context.Tutores.FirstOrDefault(tutor => tutor.Id == id);
-		if(tutor != null)
-		{
-        _context.Tutores.Remove(tutor);
-		_context.SaveChanges();
+		_tutorRepository.DeletarTutor(id);
 		return NoContent();
-		}
-		return BadRequest();
 	}
 }

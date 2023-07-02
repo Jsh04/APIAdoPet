@@ -7,8 +7,6 @@ namespace APIAdoPet.Infraestrutura.Repository
     public class TutorRepository : ITutorRepository 
     
     {
-        
-
         private readonly APIAdopetContext _context;
 
         public TutorRepository(APIAdopetContext context)
@@ -16,28 +14,45 @@ namespace APIAdoPet.Infraestrutura.Repository
             _context = context;
         }
 
-        public void AtualizarTutor(int id, Tutor tutor)
+        public Tutor AtualizarTutor(int id, Tutor tutor)
         {
-            _context.Tutores.Update(tutor);
+            var tutorAtualizado = _context.Tutores.Update(tutor);
+            _context.SaveChanges();
+            return tutorAtualizado.Entity;
         }
 
         public Tutor CadastrarTutor(Tutor tutor)
         {
             var tutorCriado = _context.Tutores.Add(tutor);
             _context.SaveChanges();
-            return tutorCriado;
+            return tutorCriado.Entity;
         }
 
         public void DeletarTutor(int id)
         {
             var tutor = _context.Tutores.FirstOrDefault(tutor => tutor.Id == id);
-            _context.Tutores.Remove(tutor);
+            if (tutor != null)
+            {
+                _context.Tutores.Remove(tutor);
+                _context.SaveChanges();
+            }
+            throw new Exception("Tutor não encontrado");
         }
 
         public IEnumerable<Tutor> ListarTutor(int skip = 0, int take = 10)
         {
             var tutores = _context.Tutores.Skip(skip).Take(take);
             return (IEnumerable<Tutor>)tutores.ToList();
+        }
+
+        public Tutor PegarTutorPorId(int id)
+        {
+            var tutor = _context.Tutores.FirstOrDefault(tutor => tutor.Id == id);
+            if(tutor != null)
+            {
+                return tutor;
+            }
+            throw new Exception("Tutor não encontrado");
         }
     }
 }
