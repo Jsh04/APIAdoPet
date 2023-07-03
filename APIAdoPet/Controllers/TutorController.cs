@@ -1,10 +1,9 @@
-﻿using APIAdoPet.Domains.DTO.TutorDTO;
+﻿using APIAdoPet.Infraestrutura.Data;
+using APIAdoPet.Domains.DTO.TutorDTO;
 using APIAdoPet.Domains;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using APIAdoPet.Infraestrutura.Repository;
-using APIAdoPet.Domains.DTO;
-using APIAdoPet.Domains.Interfaces;
 
 namespace APIAdoPet.Controllers;
 
@@ -13,11 +12,11 @@ namespace APIAdoPet.Controllers;
 [Route("[controller]")]
 public class TutorController : ControllerBase
 {
-	private readonly ITutorRepository _tutorRepository;
+	private readonly TutorRepository _tutorRepository;
 
 	private readonly IMapper _mapper;
 
-	public TutorController(ITutorRepository tutorRepository, IMapper mapper)
+	public TutorController(TutorRepository tutorRepository, IMapper mapper)
 	{
 		_tutorRepository = tutorRepository;
 		_mapper = mapper;

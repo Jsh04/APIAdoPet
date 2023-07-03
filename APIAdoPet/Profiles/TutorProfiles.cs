@@ -1,7 +1,6 @@
 ﻿using APIAdoPet.Domains.DTO.TutorDTO;
-using APIAdoPet.Domains;
+using APIAdoPet.Models;
 using AutoMapper;
-using APIAdoPet.Domains.DTO;
 
 namespace APIAdoPet.Profiles
 {
