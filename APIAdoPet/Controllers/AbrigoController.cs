@@ -2,6 +2,7 @@
 using APIAdoPet.Domains;
 using APIAdoPet.Domains.DTO.AbrigosDTO;
 using APIAdoPet.Domains.Interfaces;
+using APIAdoPet.Infraestrutura.Data;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,6 +17,7 @@ public class AbrigoController : ControllerBase
 
     public AbrigoController(IMapper mapper, IAbrigoRepository abrigoRepository)
     {
+        _abrigoRepository = abrigoRepository;
         _mapper = mapper;
         _abrigoRepository = abrigoRepository;
     }
@@ -58,8 +60,26 @@ public class AbrigoController : ControllerBase
     [HttpDelete("{id}")]
     public IActionResult DeletarAbrigo(int id)
     {
-        _abrigoRepository.DeletarAbrigo(id);
+        var abrigos = _abrigoRepository.ListarAbrigo(skip, take);
+        return _mapper.Map<List<DadosDetalhamentoAbrigo>>(abrigos.ToList());
+    }
+
+    [HttpPut("{id}")]
+    public IActionResult AtualizarAbrigo(int id, [FromBody] AtualizarAbrigoDTO abrigoDTO)
+    {
+        var abrigo = _abrigoRepository.PegarAbrigoPorId(id);
+        var abrigoRequisicao = _mapper.Map(abrigoDTO, abrigo);
+        var abrigoAtualizado = _abrigoRepository.AtualizarAbrigo(id, abrigoRequisicao);
+        if (abrigoAtualizado == null) return NotFound();
         return NoContent();
     }
+
+    [HttpDelete("{id}")]
+    public IActionResult DeletarAbrigo(int id) {
+        _abrigoRepository.DeletarAbrigo(id);
+        return NoContent();
+
+    }
+
 
 }

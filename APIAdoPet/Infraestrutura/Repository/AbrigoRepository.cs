@@ -39,11 +39,13 @@ public class AbrigoRepository : IAbrigoRepository
         throw new Exception("Tutor não encontrado");
     }
 
-    public IEnumerable<Abrigo> ListarAbrigo(int skip, int take)
+    public IEnumerable<Abrigo> ListarAbrigo(int skip = 0, int take = 10)
     {
         var abrigos = _context.Abrigo.Skip(skip).Take(take);
         return abrigos.ToList();
     }
+
+
 
     public Abrigo PegarAbrigoPorId(int id)
     {
