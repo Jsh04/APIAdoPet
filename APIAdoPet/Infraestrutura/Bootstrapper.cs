@@ -15,13 +15,16 @@ public static class Bootstrapper
         services.AddDbContext<APIAdopetContext>(opts =>
         {
             opts.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
-            AddRepository(services);
+           
         });
+        AddRepository(services);
 
     }
 
     private static void AddRepository(IServiceCollection services)
     {
         services.AddScoped<ITutorRepository, TutorRepository>();
+        services.AddScoped<IAbrigoRepository, AbrigoRepository>();
     }
 }
+
