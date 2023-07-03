@@ -1,4 +1,6 @@
-﻿using APIAdoPet.Domains.Interfaces;
+﻿using APIAdoPet.Domains;
+using APIAdoPet.Domains.DTO.PetDTO;
+using APIAdoPet.Domains.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,5 +24,13 @@ public class PetController : ControllerBase
     {
         var pets = _petRepository.ListarPets(skip, take);
         return Ok(pets);
+    }
+
+    [HttpPost]
+    public IActionResult CadastrarPet([FromBody] CadastrarPetDTO petDTO)
+    {
+        var pet = _mapper.Map<Pet>(petDTO);
+        Pet petCriado = _petRepository.CadastrarPet(pet);
+        return Ok(petCriado);
     }
 }

@@ -2,7 +2,6 @@
 using APIAdoPet.Domains;
 using APIAdoPet.Domains.DTO.AbrigosDTO;
 using APIAdoPet.Domains.Interfaces;
-using APIAdoPet.Infraestrutura.Data;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 
@@ -55,13 +54,6 @@ public class AbrigoController : ControllerBase
         var abrigoAtuzalizado = _abrigoRepository.AtualizarAbrigo(id, abrigoRequisicao);
         if (abrigoAtuzalizado == null) return NotFound();
         return Ok(abrigoAtuzalizado);
-    }
-
-    [HttpDelete("{id}")]
-    public IActionResult DeletarAbrigo(int id)
-    {
-        var abrigos = _abrigoRepository.ListarAbrigo(skip, take);
-        return _mapper.Map<List<DadosDetalhamentoAbrigo>>(abrigos.ToList());
     }
 
     [HttpPut("{id}")]
