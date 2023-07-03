@@ -31,6 +31,15 @@ public class PetController : ControllerBase
     {
         var pet = _mapper.Map<Pet>(petDTO);
         Pet petCriado = _petRepository.CadastrarPet(pet);
-        return Ok(petCriado);
+        return CreatedAtAction(nameof(PegarPetPorId), new { id = petCriado.Id }, petCriado);
     }
+    
+
+    [HttpGet("{id}")]
+    public IActionResult PegarPetPorId(int id)
+    {
+        var pet = _petRepository.PegarPetPorId(id);
+        return Ok(_mapper.Map<ListarPetDTO>(pet));
+    }
+   
 }
