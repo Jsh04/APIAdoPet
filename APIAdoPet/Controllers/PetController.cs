@@ -51,5 +51,19 @@ public class PetController : ControllerBase
         if (petAtualizado == null) return BadRequest();
         return NoContent();
     }
+    [HttpDelete("{id}")]
+    public IActionResult DeletarPet(int id)
+    {
+        try
+        {
+            _petRepository.DeletarPet(id);
+            return NoContent();
+
+        }
+        catch (Exception e)
+        {
+            return BadRequest("Pet não encontrado");
+        }
+    }
    
 }

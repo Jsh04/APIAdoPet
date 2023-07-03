@@ -32,6 +32,7 @@ public class PetRepository : IPetRepository
         var pet = _context.Pets.FirstOrDefault(pet => pet.Id == id);
         if (pet == null) throw new Exception("Pet não existe"); 
         _context.Pets.Remove(pet);
+        _context.SaveChanges();
     }
 
     public IEnumerable<Pet> ListarPets(int skip, int take)
