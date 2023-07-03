@@ -3,18 +3,17 @@ using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using APIAdoPet.Domains;
 
-namespace APIAdoPet.Domains.DTO.TutorDTO
+namespace APIAdoPet.Domains.DTO.AbrigosDTO
 {
-    public class AtualizaTutorDTO
+    public class AtualizaAbrigoDTO
     {
-        [Required]
-        public string Nome { get; set; }
+        [MinLength(3)]
+        public string Name { get; set; }
+        [EmailAddress]
+        [MinLength(10)]
+        public string Email { get; set; }
         [Required]
         public Endereco Endereco { get; set; }
-        [MaxLength(15)]
-        public string Telefone { get; set; }
-        [Required]
         public string Senha { get; set; }
-        public string Foto { get; set; }
     }
 }

@@ -1,5 +1,4 @@
 ﻿namespace APIAdoPet.Domains.Interfaces;
-
 public interface ITutorRepository
 {
     Tutor CadastrarTutor(Tutor tutor);

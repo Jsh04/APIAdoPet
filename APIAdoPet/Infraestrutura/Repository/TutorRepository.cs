@@ -42,7 +42,7 @@ namespace APIAdoPet.Infraestrutura.Repository
         public IEnumerable<Tutor> ListarTutor(int skip = 0, int take = 10)
         {
             var tutores = _context.Tutores.Skip(skip).Take(take);
-            return (IEnumerable<Tutor>)tutores.ToList();
+            return tutores.ToList();
         }
 
         public Tutor PegarTutorPorId(int id)

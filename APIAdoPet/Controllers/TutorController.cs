@@ -1,9 +1,8 @@
-﻿using APIAdoPet.Infraestrutura.Data;
-using APIAdoPet.Domains.DTO.TutorDTO;
+﻿using APIAdoPet.Domains.DTO.TutorDTO;
 using APIAdoPet.Domains;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using APIAdoPet.Infraestrutura.Repository;
+using APIAdoPet.Domains.Interfaces;
 
 namespace APIAdoPet.Controllers;
 
@@ -12,11 +11,11 @@ namespace APIAdoPet.Controllers;
 [Route("[controller]")]
 public class TutorController : ControllerBase
 {
-	private readonly TutorRepository _tutorRepository;
+	private readonly ITutorRepository _tutorRepository;
 
 	private readonly IMapper _mapper;
 
-	public TutorController(TutorRepository tutorRepository, IMapper mapper)
+	public TutorController(ITutorRepository tutorRepository, IMapper mapper)
 	{
 		_tutorRepository = tutorRepository;
 		_mapper = mapper;
@@ -33,6 +32,7 @@ public class TutorController : ControllerBase
 	[HttpGet]
 	public IEnumerable<ListarTutorDTO> ListarTutores([FromQuery] int skip = 0, [FromQuery] int take = 10)
 	{
+		Console.WriteLine("Pasosu por aq");
 		return _mapper.Map<List<ListarTutorDTO>>(_tutorRepository.ListarTutor(skip, take));
 	}
 
@@ -46,7 +46,7 @@ public class TutorController : ControllerBase
 	}
 
 	[HttpPut("{id}")]
-	public IActionResult AtualizarFilme(int id, [FromBody] AtualizaTutorDTO tutorDTO)
+	public IActionResult AtualizarTutor(int id, [FromBody] AtualizaTutorDTO tutorDTO)
 	{
 		var tutor = new Tutor();
 		var tutorRequisicao = _mapper.Map(tutorDTO, tutor);

@@ -2,8 +2,6 @@
 using APIAdoPet.Domains.Interfaces;
 using APIAdoPet.Infraestrutura.Repository;
 using Microsoft.EntityFrameworkCore;
-using System.Runtime.CompilerServices;
-
 namespace APIAdoPet.Infraestrutura;
 
 public static class Bootstrapper
@@ -12,16 +10,16 @@ public static class Bootstrapper
     {
         var connectionString = configuration.GetConnectionString("APIAdopetConnection");
 
-        services.AddDbContext<APIAdopetContext>(opts =>
-        {
-            opts.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
-            AddRepository(services);
-        });
+        services.AddDbContext<APIAdopetContext>(opts => opts.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+       
+        AddRepository(services);
+        
 
     }
 
-    private static void AddRepository(IServiceCollection services)
+    static void AddRepository(IServiceCollection services)
     {
+        services.AddScoped<IAbrigoRepository, AbrigoRepository>();
         services.AddScoped<ITutorRepository, TutorRepository>();
     }
 }

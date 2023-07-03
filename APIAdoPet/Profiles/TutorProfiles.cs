@@ -1,5 +1,5 @@
 ﻿using APIAdoPet.Domains.DTO.TutorDTO;
-using APIAdoPet.Models;
+using APIAdoPet.Domains;
 using AutoMapper;
 
 namespace APIAdoPet.Profiles

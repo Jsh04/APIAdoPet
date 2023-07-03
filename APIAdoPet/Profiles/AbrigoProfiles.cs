@@ -1,5 +1,5 @@
 ﻿using APIAdoPet.Domains.DTO.AbrigosDTO;
-using APIAdoPet.Models;
+using APIAdoPet.Domains;
 using AutoMapper;
 
 namespace APIAdoPet.Profiles
@@ -10,6 +10,7 @@ namespace APIAdoPet.Profiles
         {
             CreateMap<CadastrarAbrigoDTO, Abrigo>();
             CreateMap<Abrigo, DadosDetalhamentoAbrigo>();
+            CreateMap<AtualizaAbrigoDTO, Abrigo>();
         }
     }
 }
