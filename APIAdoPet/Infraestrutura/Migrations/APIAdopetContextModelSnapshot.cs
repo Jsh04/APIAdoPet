@@ -38,7 +38,7 @@ namespace APIAdoPet.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Abrigo");
+                    b.ToTable("Abrigo", (string)null);
                 });
 
             modelBuilder.Entity("APIAdoPet.Models.Pet", b =>
@@ -73,7 +73,7 @@ namespace APIAdoPet.Migrations
 
                     b.HasIndex("AbrigoId");
 
-                    b.ToTable("Pets");
+                    b.ToTable("Pets", (string)null);
                 });
 
             modelBuilder.Entity("APIAdoPet.Models.Tutor", b =>
@@ -109,12 +109,12 @@ namespace APIAdoPet.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Tutores");
+                    b.ToTable("Tutores", (string)null);
                 });
 
             modelBuilder.Entity("APIAdoPet.Models.Abrigo", b =>
                 {
-                    b.OwnsOne("APIAdoPet.Models.Endereco", "Endereco", b1 =>
+                    b.OwnsOne("APIAdoPet.Models.Abrigo.Endereco#APIAdoPet.Models.Endereco", "Endereco", b1 =>
                         {
                             b1.Property<int>("AbrigoId")
                                 .HasColumnType("int");
@@ -141,7 +141,7 @@ namespace APIAdoPet.Migrations
 
                             b1.HasKey("AbrigoId");
 
-                            b1.ToTable("Abrigo");
+                            b1.ToTable("Abrigo", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("AbrigoId");
@@ -159,7 +159,7 @@ namespace APIAdoPet.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.OwnsOne("APIAdoPet.Models.Endereco", "Endereco", b1 =>
+                    b.OwnsOne("APIAdoPet.Models.Pet.Endereco#APIAdoPet.Models.Endereco", "Endereco", b1 =>
                         {
                             b1.Property<int>("PetId")
                                 .HasColumnType("int");
@@ -186,7 +186,7 @@ namespace APIAdoPet.Migrations
 
                             b1.HasKey("PetId");
 
-                            b1.ToTable("Pets");
+                            b1.ToTable("Pets", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("PetId");
@@ -200,7 +200,7 @@ namespace APIAdoPet.Migrations
 
             modelBuilder.Entity("APIAdoPet.Models.Tutor", b =>
                 {
-                    b.OwnsOne("APIAdoPet.Models.Endereco", "Endereco", b1 =>
+                    b.OwnsOne("APIAdoPet.Models.Tutor.Endereco#APIAdoPet.Models.Endereco", "Endereco", b1 =>
                         {
                             b1.Property<int>("TutorId")
                                 .HasColumnType("int");
@@ -227,7 +227,7 @@ namespace APIAdoPet.Migrations
 
                             b1.HasKey("TutorId");
 
-                            b1.ToTable("Tutores");
+                            b1.ToTable("Tutores", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("TutorId");
