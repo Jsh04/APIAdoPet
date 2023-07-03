@@ -41,5 +41,15 @@ public class PetController : ControllerBase
         var pet = _petRepository.PegarPetPorId(id);
         return Ok(_mapper.Map<ListarPetDTO>(pet));
     }
+
+    [HttpPut("{id}")]
+    public IActionResult AtualizarPet(int id, AtualizarPetDTO petDTO)
+    {
+        var pet = _petRepository.PegarPetPorId(id);
+        var petRequisicao = _mapper.Map(petDTO, pet);
+        var petAtualizado  = _petRepository.AtualizarPet(id, petRequisicao);
+        if (petAtualizado == null) return BadRequest();
+        return NoContent();
+    }
    
 }
