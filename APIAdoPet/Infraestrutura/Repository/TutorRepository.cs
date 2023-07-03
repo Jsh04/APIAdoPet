@@ -35,6 +35,7 @@ namespace APIAdoPet.Infraestrutura.Repository
             {
                 _context.Tutores.Remove(tutor);
                 _context.SaveChanges();
+                return;
             }
             throw new Exception("Tutor não encontrado");
         }

@@ -46,9 +46,9 @@ public class TutorController : ControllerBase
 	}
 
 	[HttpPut("{id}")]
-	public IActionResult AtualizarFilme(int id, [FromBody] AtualizaTutorDTO tutorDTO)
+	public IActionResult AtualizarTutor(int id, [FromBody] AtualizaTutorDTO tutorDTO)
 	{
-		var tutor = new Tutor();
+		var tutor = _tutorRepository.PegarTutorPorId(id);
 		var tutorRequisicao = _mapper.Map(tutorDTO, tutor);
 		var tutorAtualizado = _tutorRepository.AtualizarTutor(id, tutorRequisicao);
 		if(tutorAtualizado == null) return NotFound();

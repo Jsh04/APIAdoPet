@@ -23,5 +23,6 @@ public static class Bootstrapper
     private static void AddRepository(IServiceCollection services)
     {
         services.AddScoped<ITutorRepository, TutorRepository>();
+        services.AddScoped<IAbrigoRepository, AbrigoRepository>();
     }
 }
