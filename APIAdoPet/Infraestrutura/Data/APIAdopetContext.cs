@@ -18,4 +18,5 @@ public class APIAdopetContext : DbContext
     public DbSet<Tutor> Tutores { get; set; }
     public DbSet<Pet> Pets { get; set; }
     public DbSet<Abrigo> Abrigo { get; set; }
+    public DbSet<Adocao> Adocaos { get; set; }
 }
