@@ -1,9 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 
 namespace APIAdoPet.Domains;
 
 public class Abrigo
 {
+
     [Required]
     [Key]
     public int Id { get; set; }
@@ -20,5 +23,6 @@ public class Abrigo
     public Endereco Endereco { get; set; }
 
     public virtual ICollection<Pet> Pets { get; set; }
+
 
 }

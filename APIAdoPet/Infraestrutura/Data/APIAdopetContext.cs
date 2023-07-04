@@ -1,4 +1,5 @@
 ﻿using APIAdoPet.Domains;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace APIAdoPet.Infraestrutura.Data;

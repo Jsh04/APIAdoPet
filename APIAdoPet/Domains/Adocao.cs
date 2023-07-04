@@ -12,6 +12,8 @@ public class Adocao
     public string? Mensagem { get; set; }
     [Required]
     public int TutorId { get; set; }
-    public virtual ICollection<Pet> Pets { get; set; }
+    [Required]
+    public int PetId { get; set; }
+    public virtual Pet Pet { get; set; }
     public virtual Tutor Tutor { get; set; }
 }

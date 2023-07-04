@@ -39,7 +39,7 @@ namespace APIAdoPet.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Abrigo");
+                    b.ToTable("Abrigo", (string)null);
                 });
 
             modelBuilder.Entity("APIAdoPet.Domains.Adocao", b =>
@@ -62,7 +62,7 @@ namespace APIAdoPet.Migrations
 
                     b.HasIndex("TutorId");
 
-                    b.ToTable("Adocaos");
+                    b.ToTable("Adocaos", (string)null);
                 });
 
             modelBuilder.Entity("APIAdoPet.Domains.Pet", b =>
@@ -102,7 +102,7 @@ namespace APIAdoPet.Migrations
 
                     b.HasIndex("AdocaoId");
 
-                    b.ToTable("Pets");
+                    b.ToTable("Pets", (string)null);
                 });
 
             modelBuilder.Entity("APIAdoPet.Domains.Tutor", b =>
@@ -135,12 +135,12 @@ namespace APIAdoPet.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Tutores");
+                    b.ToTable("Tutores", (string)null);
                 });
 
             modelBuilder.Entity("APIAdoPet.Domains.Abrigo", b =>
                 {
-                    b.OwnsOne("APIAdoPet.Domains.Endereco", "Endereco", b1 =>
+                    b.OwnsOne("APIAdoPet.Domains.Abrigo.Endereco#APIAdoPet.Domains.Endereco", "Endereco", b1 =>
                         {
                             b1.Property<int>("AbrigoId")
                                 .HasColumnType("int");
@@ -167,7 +167,7 @@ namespace APIAdoPet.Migrations
 
                             b1.HasKey("AbrigoId");
 
-                            b1.ToTable("Abrigo");
+                            b1.ToTable("Abrigo", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("AbrigoId");
@@ -200,7 +200,7 @@ namespace APIAdoPet.Migrations
                         .WithMany("Pets")
                         .HasForeignKey("AdocaoId");
 
-                    b.OwnsOne("APIAdoPet.Domains.Endereco", "Endereco", b1 =>
+                    b.OwnsOne("APIAdoPet.Domains.Pet.Endereco#APIAdoPet.Domains.Endereco", "Endereco", b1 =>
                         {
                             b1.Property<int>("PetId")
                                 .HasColumnType("int");
@@ -227,7 +227,7 @@ namespace APIAdoPet.Migrations
 
                             b1.HasKey("PetId");
 
-                            b1.ToTable("Pets");
+                            b1.ToTable("Pets", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("PetId");
@@ -241,7 +241,7 @@ namespace APIAdoPet.Migrations
 
             modelBuilder.Entity("APIAdoPet.Domains.Tutor", b =>
                 {
-                    b.OwnsOne("APIAdoPet.Domains.Endereco", "Endereco", b1 =>
+                    b.OwnsOne("APIAdoPet.Domains.Tutor.Endereco#APIAdoPet.Domains.Endereco", "Endereco", b1 =>
                         {
                             b1.Property<int>("TutorId")
                                 .HasColumnType("int");
@@ -268,7 +268,7 @@ namespace APIAdoPet.Migrations
 
                             b1.HasKey("TutorId");
 
-                            b1.ToTable("Tutores");
+                            b1.ToTable("Tutores", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("TutorId");
