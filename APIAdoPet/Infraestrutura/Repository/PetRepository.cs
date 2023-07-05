@@ -37,7 +37,7 @@ public class PetRepository : IPetRepository
 
     public IEnumerable<Pet> ListarPets(int skip, int take)
     {
-        return _context.Pets.Skip(skip).Take(take).ToList();
+        return _context.Pets.Skip(skip).Take(take).Where(pet => pet.Adotado == false).ToList();
     }
 
     public Pet PegarPetPorId(int id)
