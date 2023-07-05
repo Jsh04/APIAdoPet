@@ -4,4 +4,5 @@ public interface IAdocaoRepository
 {
     Adocao CadastrarAdocao(Adocao adocao);
     void DeletarAdocao(int id);
+    Adocao PegarAdocaoPorId(int id);
 }

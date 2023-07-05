@@ -22,5 +22,6 @@ public static class Bootstrapper
         services.AddScoped<IAbrigoRepository, AbrigoRepository>();
         services.AddScoped<ITutorRepository, TutorRepository>();
         services.AddScoped<IPetRepository,PetRepository>();
+        services.AddScoped<IAdocaoRepository,AdocaoRepository>();
     }
 }

@@ -2,6 +2,7 @@
 using APIAdoPet.Infraestrutura.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,9 +10,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace APIAdoPet.Migrations
 {
     [DbContext(typeof(APIAdopetContext))]
-    partial class APIAdopetContextModelSnapshot : ModelSnapshot
+    [Migration("20230705120616_adicionando coluna PetId")]
+    partial class adicionandocolunaPetId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

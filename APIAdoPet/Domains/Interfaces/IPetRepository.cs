@@ -7,4 +7,5 @@ public interface IPetRepository
     Pet AtualizarPet(int id, Pet pet);
     IEnumerable<Pet> ListarPets(int skip, int take);
     Pet PegarPetPorId(int id);
+    Pet PegarPetPeloNome(string nome);
 }

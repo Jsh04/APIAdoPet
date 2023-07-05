@@ -46,4 +46,11 @@ public class PetRepository : IPetRepository
         if(pet == null) throw new Exception("Pet não existe");
         return pet;
     }
+
+    public Pet PegarPetPeloNome(string nome)
+    {
+       var pet = _context.Pets.FirstOrDefault(pet => pet.Nome.Equals(nome));
+        if (pet == null) throw new Exception("Pet Não encontrado");
+        return pet;
+    }
 }

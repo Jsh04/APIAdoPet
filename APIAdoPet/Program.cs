@@ -2,11 +2,13 @@ using APIAdoPet.Domains;
 using APIAdoPet.Infraestrutura;
 using APIAdoPet.Infraestrutura.Data;
 using APIAdoPet.Infraestrutura.Security;
+using APIAdoPet.Services;
 using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AdicionarInfraestrutura(builder.Configuration);
+builder.Services.AddServices(builder.Configuration);
 // Add services to the container.
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddDataSecurity();

@@ -29,5 +29,20 @@ namespace APIAdoPet.Infraestrutura.Repository
             }
             _context.SaveChanges();
         }
+
+        public Adocao PegarAdocaoPorId(int id)
+        {
+            Adocao? adocao = _context.Adocaos.FirstOrDefault(adocao => adocao.Id == id);
+            if(adocao != null)
+            {
+                throw new Exception("Adoção não existe");
+            }
+            return adocao;
+        }
+        public Pet PegarPetPorNome(string nome)
+        {
+            var petId = _context.Pets.FirstOrDefault(pet => pet.Nome.Equals(nome));
+            return petId;
+        }
     }
 }
