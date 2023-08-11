@@ -1,6 +1,7 @@
 ﻿using APIAdoPet.Domains;
 using APIAdoPet.Domains.Interfaces;
 using APIAdoPet.Infraestrutura.Data;
+using System;
 
 namespace APIAdoPet.Infraestrutura.Repository
 {
@@ -25,7 +26,7 @@ namespace APIAdoPet.Infraestrutura.Repository
             Adocao? adocao = _context.Adocaos.FirstOrDefault(adocao => adocao.Id == id);
             if (adocao != null)
             {
-                throw new Exception("Adoção não existe");
+                throw new System.Exception("Adoção não existe");
             }
             _context.SaveChanges();
         }
@@ -35,7 +36,7 @@ namespace APIAdoPet.Infraestrutura.Repository
             Adocao? adocao = _context.Adocaos.FirstOrDefault(adocao => adocao.Id == id);
             if(adocao != null)
             {
-                throw new Exception("Adoção não existe");
+                throw new System.Exception("Adoção não existe");
             }
             return adocao;
         }

@@ -3,6 +3,7 @@ using System;
 using APIAdoPet.Infraestrutura.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace APIAdoPet.Migrations
 {
     [DbContext(typeof(APIAdopetContext))]
-    partial class APIAdopetContextModelSnapshot : ModelSnapshot
+    [Migration("20230811215032_Adicionando-Usuario")]
+    partial class AdicionandoUsuario
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,6 +33,10 @@ namespace APIAdoPet.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Senha")
                         .IsRequired()
                         .HasColumnType("longtext");
 
@@ -122,6 +129,10 @@ namespace APIAdoPet.Migrations
                         .HasDefaultValue("");
 
                     b.Property<string>("Nome")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Senha")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("Telefone")

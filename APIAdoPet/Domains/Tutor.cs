@@ -16,6 +16,7 @@ public class Tutor
     public string? Telefone { get; set; } = String.Empty;
     [Required]
     public string Email { get; set; }
-    [Required]
-    public string Senha { get; set; }
+
+
+    public virtual Usuario Usuario { get; set; }
 }

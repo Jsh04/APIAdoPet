@@ -1,6 +1,8 @@
 ﻿using APIAdoPet.Domains;
 using APIAdoPet.Domains.Interfaces;
 using APIAdoPet.Infraestrutura.Data;
+using Microsoft.CSharp.RuntimeBinder;
+using System.Runtime.ExceptionServices;
 
 namespace APIAdoPet.Infraestrutura.Repository;
 
@@ -30,7 +32,7 @@ public class PetRepository : IPetRepository
     public void DeletarPet(int id)
     {
         var pet = _context.Pets.FirstOrDefault(pet => pet.Id == id);
-        if (pet == null) throw new Exception("Pet não existe"); 
+        if (pet == null) throw new System.Exception("Pet não existe"); 
         _context.Pets.Remove(pet);
         _context.SaveChanges();
     }
@@ -43,14 +45,14 @@ public class PetRepository : IPetRepository
     public Pet PegarPetPorId(int id)
     {
         var pet =  _context.Pets.FirstOrDefault(pet => pet.Id == id);
-        if(pet == null) throw new Exception("Pet não existe");
+        if(pet == null) throw new System.Exception("Pet não existe");
         return pet;
     }
 
     public Pet PegarPetPeloNome(string nome)
     {
        var pet = _context.Pets.FirstOrDefault(pet => pet.Nome.Equals(nome));
-        if (pet == null) throw new Exception("Pet Não encontrado");
+        if (pet == null) throw new System.Exception("Pet Não encontrado");
         return pet;
     }
 }

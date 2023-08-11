@@ -9,6 +9,9 @@ public static class SecurityDataConfiguration
 {
     public static void AddDataSecurity(this IServiceCollection services)
     {
+        services.AddIdentity<Usuario, IdentityRole>()
+            .AddEntityFrameworkStores<APIAdopetContext>()
+            .AddDefaultTokenProviders();
     }
 
 }

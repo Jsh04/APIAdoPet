@@ -60,7 +60,7 @@ public class PetController : ControllerBase
             return NoContent();
 
         }
-        catch (Exception e)
+        catch (System.Exception e)
         {
             return BadRequest("Pet não encontrado");
         }

@@ -37,7 +37,7 @@ namespace APIAdoPet.Infraestrutura.Repository
                 _context.SaveChanges();
                 return;
             }
-            throw new Exception("Tutor não encontrado");
+            throw new System.Exception("Tutor não encontrado");
         }
 
         public IEnumerable<Tutor> ListarTutor(int skip = 0, int take = 10)
@@ -53,7 +53,7 @@ namespace APIAdoPet.Infraestrutura.Repository
             {
                 return tutor;
             }
-            throw new Exception("Tutor não encontrado");
+            throw new System.Exception("Tutor não encontrado");
         }
     }
 }

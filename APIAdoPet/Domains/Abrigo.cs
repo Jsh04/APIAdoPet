@@ -18,11 +18,11 @@ public class Abrigo
     [MinLength(10)]
     public string Email { get; set; }
     [Required]
-    public string Senha { get; set; }
-    [Required]
     public Endereco Endereco { get; set; }
 
     public virtual ICollection<Pet> Pets { get; set; }
+
+    public virtual Usuario Usuario { get; set; }
 
 
 }

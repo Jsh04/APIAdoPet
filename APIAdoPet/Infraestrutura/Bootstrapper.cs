@@ -13,7 +13,6 @@ public static class Bootstrapper
         services.AddDbContext<APIAdopetContext>(opts => opts.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
        
         AddRepository(services);
-        
 
     }
 

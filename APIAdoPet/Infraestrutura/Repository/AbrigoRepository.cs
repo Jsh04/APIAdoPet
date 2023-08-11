@@ -36,7 +36,7 @@ public class AbrigoRepository : IAbrigoRepository
             _context.SaveChanges();
             return;
         }
-        throw new Exception("Tutor não encontrado");
+        throw new System.Exception("Tutor não encontrado");
     }
 
     public IEnumerable<Abrigo> ListarAbrigo(int skip = 0, int take = 10)
@@ -54,6 +54,6 @@ public class AbrigoRepository : IAbrigoRepository
         {
             return abrigo;
         }
-        throw new Exception("Tutor não encontrado");
+        throw new System.Exception("Tutor não encontrado");
     }
 }

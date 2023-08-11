@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace APIAdoPet.Infraestrutura.Data;
 
-public class APIAdopetContext : DbContext
+public class APIAdopetContext : IdentityDbContext<Usuario>
 {
     public APIAdopetContext(DbContextOptions<APIAdopetContext> opts) : base(opts)
     {
@@ -12,6 +12,7 @@ public class APIAdopetContext : DbContext
     }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder);
         modelBuilder.Entity<Tutor>().Property(t => t.Telefone).HasDefaultValue("");
         modelBuilder.Entity<Tutor>().Property(t => t.Foto).HasDefaultValue("");
     }
