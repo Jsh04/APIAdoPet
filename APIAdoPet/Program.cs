@@ -10,6 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AdicionarInfraestrutura(builder.Configuration);
 builder.Services.AddServices(builder.Configuration);
 builder.Services.AddDataSecurity();
+builder.Services.ConfigurationOfPassword();
 // Add services to the container.
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddDataSecurity();

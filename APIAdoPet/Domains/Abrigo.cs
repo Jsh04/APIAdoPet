@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace APIAdoPet.Domains;
 
-public class Abrigo
+public class Abrigo 
 {
 
     [Required]

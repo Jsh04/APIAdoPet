@@ -3,6 +3,7 @@ using APIAdoPet.Domains;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using APIAdoPet.Domains.Interfaces;
+using Microsoft.AspNetCore.Identity;
 
 namespace APIAdoPet.Controllers;
 
@@ -15,24 +16,36 @@ public class TutorController : ControllerBase
 
 	private readonly IMapper _mapper;
 
-	public TutorController(ITutorRepository tutorRepository, IMapper mapper)
+	private readonly UserManager<Usuario> _userManager;
+
+	public TutorController(ITutorRepository tutorRepository, IMapper mapper, UserManager<Usuario> userManager)
 	{
 		_tutorRepository = tutorRepository;
+		_userManager = userManager;
 		_mapper = mapper;
 	}
 
 	[HttpPost]
-	public IActionResult CadastrarTutor([FromBody] CadastrarTutorDTO tutorDto)
+	public async Task<IActionResult> CadastrarTutor([FromBody] CadastrarTutorDTO tutorDto)
 	{
+		Usuario usuario = new()
+		{
+			UserName = tutorDto.Nome.Replace(" ", ""),
+			Email = tutorDto.Email
+		};
 		var tutor = _mapper.Map<Tutor>(tutorDto);
+		tutor.Usuario = usuario;
+		var resultado = await _userManager.CreateAsync(usuario, tutorDto.Senha);
 		_tutorRepository.CadastrarTutor(tutor);
-		return CreatedAtAction(nameof(PegarTutorPorId), new { id = tutor.Id }, tutor);
+		if (resultado.Succeeded)
+			return CreatedAtAction(nameof(PegarTutorPorId), new { id = tutor.Id }, tutor);
+		else
+			return BadRequest("Credencias Inválidadas");
 	}
 
 	[HttpGet]
 	public IEnumerable<ListarTutorDTO> ListarTutores([FromQuery] int skip = 0, [FromQuery] int take = 10)
 	{
-		Console.WriteLine("Pasosu por aq");
 		return _mapper.Map<List<ListarTutorDTO>>(_tutorRepository.ListarTutor(skip, take));
 	}
 

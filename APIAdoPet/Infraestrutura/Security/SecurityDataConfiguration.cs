@@ -2,6 +2,7 @@
 using APIAdoPet.Infraestrutura.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Server.IIS.Core;
+using Microsoft.Extensions.Options;
 
 namespace APIAdoPet.Infraestrutura.Security;
 
@@ -12,6 +13,20 @@ public static class SecurityDataConfiguration
         services.AddIdentity<Usuario, IdentityRole>()
             .AddEntityFrameworkStores<APIAdopetContext>()
             .AddDefaultTokenProviders();
+    }
+
+    public static void ConfigurationOfPassword(this IServiceCollection services)
+    {
+        services.Configure<IdentityOptions>(opts =>
+        {
+            opts.Password.RequiredLength = 4;
+            opts.Password.RequireDigit = true;
+            opts.Password.RequireLowercase = false;
+            opts.Password.RequireNonAlphanumeric = false;
+            opts.Password.RequireUppercase = false;
+            opts.User.RequireUniqueEmail = true;
+            opts.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        });
     }
 
 }
