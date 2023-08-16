@@ -3,6 +3,7 @@ using System;
 using APIAdoPet.Infraestrutura.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace APIAdoPet.Migrations
 {
     [DbContext(typeof(APIAdopetContext))]
-    partial class APIAdopetContextModelSnapshot : ModelSnapshot
+    [Migration("20230814005853_Pequenas Correcoes")]
+    partial class PequenasCorrecoes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

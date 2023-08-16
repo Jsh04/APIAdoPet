@@ -3,6 +3,7 @@ using APIAdoPet.Domains.DTO.AdocaoDTO;
 using APIAdoPet.Domains.Interfaces;
 using APIAdoPet.Services.Interfaces;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace APIAdoPet.Controllers;
@@ -27,7 +28,6 @@ public class AdocaoController : ControllerBase
     {
         Adocao adocao = _mapper.Map<Adocao>(adocaoDTO);
         Pet pet = _adocaoService.EncontrarPetPeloNome(adocaoDTO.NomePet);
-        Console.WriteLine(pet.Id);
         adocao.PetId = pet.Id;
         pet.FoiAdotado();
         var adocaoCadastrado = _adocaoRepository.CadastrarAdocao(adocao);

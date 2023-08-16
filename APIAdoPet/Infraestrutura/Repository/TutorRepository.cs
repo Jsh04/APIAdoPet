@@ -53,7 +53,7 @@ namespace APIAdoPet.Infraestrutura.Repository
             {
                 return tutor;
             }
-            throw new System.Exception("Tutor não encontrado");
+            return null;
         }
     }
 }

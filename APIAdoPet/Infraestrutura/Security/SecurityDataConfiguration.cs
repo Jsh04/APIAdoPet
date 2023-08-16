@@ -1,5 +1,6 @@
 ﻿using APIAdoPet.Domains;
 using APIAdoPet.Infraestrutura.Data;
+using APIAdoPet.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Server.IIS.Core;
 using Microsoft.Extensions.Options;
@@ -11,6 +12,7 @@ public static class SecurityDataConfiguration
     public static void AddDataSecurity(this IServiceCollection services)
     {
         services.AddIdentity<Usuario, IdentityRole>()
+            .AddRoleManager<RoleManager<IdentityRole>>()
             .AddEntityFrameworkStores<APIAdopetContext>()
             .AddDefaultTokenProviders();
     }
@@ -27,6 +29,10 @@ public static class SecurityDataConfiguration
             opts.User.RequireUniqueEmail = true;
             opts.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         });
-    }
+    } 
+
+    
+
+
 
 }

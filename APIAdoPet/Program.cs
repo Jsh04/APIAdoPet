@@ -7,13 +7,14 @@ using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
+
 builder.Services.AdicionarInfraestrutura(builder.Configuration);
 builder.Services.AddServices(builder.Configuration);
 builder.Services.AddDataSecurity();
 builder.Services.ConfigurationOfPassword();
 // Add services to the container.
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-builder.Services.AddDataSecurity();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -38,6 +39,7 @@ else
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+app.UseAuthentication();
 
 app.MapControllers();
 

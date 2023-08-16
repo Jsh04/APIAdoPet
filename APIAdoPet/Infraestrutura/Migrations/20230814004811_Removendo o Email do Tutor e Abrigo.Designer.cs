@@ -3,6 +3,7 @@ using System;
 using APIAdoPet.Infraestrutura.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace APIAdoPet.Migrations
 {
     [DbContext(typeof(APIAdopetContext))]
-    partial class APIAdopetContextModelSnapshot : ModelSnapshot
+    [Migration("20230814004811_Removendo o Email do Tutor e Abrigo")]
+    partial class RemovendooEmaildoTutoreAbrigo
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -124,6 +127,7 @@ namespace APIAdoPet.Migrations
                         .HasDefaultValue("");
 
                     b.Property<string>("UsuarioId")
+                        .IsRequired()
                         .HasColumnType("varchar(255)");
 
                     b.HasKey("Id");
@@ -440,7 +444,9 @@ namespace APIAdoPet.Migrations
                 {
                     b.HasOne("APIAdoPet.Domains.Usuario", "Usuario")
                         .WithMany()
-                        .HasForeignKey("UsuarioId");
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.OwnsOne("APIAdoPet.Domains.Endereco", "Endereco", b1 =>
                         {

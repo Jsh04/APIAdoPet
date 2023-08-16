@@ -9,26 +9,18 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Domains\DTO\NovaPasta\**" />
-    <Compile Remove="Domains\NovaPasta\**" />
     <Compile Remove="NovaPasta1\**" />
     <Compile Remove="NovaPasta2\**" />
     <Compile Remove="NovaPasta3\**" />
     <Compile Remove="NovaPasta4\**" />
-    <Content Remove="Domains\DTO\NovaPasta\**" />
-    <Content Remove="Domains\NovaPasta\**" />
     <Content Remove="NovaPasta1\**" />
     <Content Remove="NovaPasta2\**" />
     <Content Remove="NovaPasta3\**" />
     <Content Remove="NovaPasta4\**" />
-    <EmbeddedResource Remove="Domains\DTO\NovaPasta\**" />
-    <EmbeddedResource Remove="Domains\NovaPasta\**" />
     <EmbeddedResource Remove="NovaPasta1\**" />
     <EmbeddedResource Remove="NovaPasta2\**" />
     <EmbeddedResource Remove="NovaPasta3\**" />
     <EmbeddedResource Remove="NovaPasta4\**" />
-    <None Remove="Domains\DTO\NovaPasta\**" />
-    <None Remove="Domains\NovaPasta\**" />
     <None Remove="NovaPasta1\**" />
     <None Remove="NovaPasta2\**" />
     <None Remove="NovaPasta3\**" />
@@ -46,12 +38,7 @@
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.19" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.19" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.8" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.8">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="7.0.8" />
+    <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="6.0.19" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.0" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="7.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />

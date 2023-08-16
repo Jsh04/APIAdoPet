@@ -4,6 +4,9 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using APIAdoPet.Domains.Interfaces;
 using Microsoft.AspNetCore.Identity;
+using APIAdoPet.Services.Interfaces;
+using APIAdoPet.Exception;
+using System.Net;
 
 namespace APIAdoPet.Controllers;
 
@@ -12,65 +15,76 @@ namespace APIAdoPet.Controllers;
 [Route("[controller]")]
 public class TutorController : ControllerBase
 {
-	private readonly ITutorRepository _tutorRepository;
+	private readonly ITutorService _service;
 
-	private readonly IMapper _mapper;
-
-	private readonly UserManager<Usuario> _userManager;
-
-	public TutorController(ITutorRepository tutorRepository, IMapper mapper, UserManager<Usuario> userManager)
+	public TutorController(ITutorService service)
 	{
-		_tutorRepository = tutorRepository;
-		_userManager = userManager;
-		_mapper = mapper;
+		_service = service;
 	}
 
 	[HttpPost]
 	public async Task<IActionResult> CadastrarTutor([FromBody] CadastrarTutorDTO tutorDto)
 	{
-		Usuario usuario = new()
+		try
 		{
-			UserName = tutorDto.Nome.Replace(" ", ""),
-			Email = tutorDto.Email
-		};
-		var tutor = _mapper.Map<Tutor>(tutorDto);
-		tutor.Usuario = usuario;
-		var resultado = await _userManager.CreateAsync(usuario, tutorDto.Senha);
-		_tutorRepository.CadastrarTutor(tutor);
-		if (resultado.Succeeded)
-			return CreatedAtAction(nameof(PegarTutorPorId), new { id = tutor.Id }, tutor);
-		else
-			return BadRequest("Credencias Inválidadas");
+            var tutor = await _service.CadastrarTutor(tutorDto);
+
+            return CreatedAtAction(nameof(PegarTutorPorId), new { id = tutor.Id }, tutor);
+        }
+        catch(HttpResponseException ex)
+		{
+			return BadRequest(new HttpResponseException(ex.StatusCode, ex.Message));
+		}
 	}
 
 	[HttpGet]
 	public IEnumerable<ListarTutorDTO> ListarTutores([FromQuery] int skip = 0, [FromQuery] int take = 10)
 	{
-		return _mapper.Map<List<ListarTutorDTO>>(_tutorRepository.ListarTutor(skip, take));
+		return _service.ListarTutores(skip, take);
 	}
 
 	[HttpGet("{id}")]
 	public IActionResult PegarTutorPorId(int id)
 	{
-		var tutor = _tutorRepository.PegarTutorPorId(id);
-		if (tutor == null) return NotFound();
-		var tutorDTO = _mapper.Map<ListarTutorDTO>(tutor);
+		var tutorDTO = _service.PegarTutorPorId(id);
 		return Ok(tutorDTO);
 	}
 
 	[HttpPut("{id}")]
 	public IActionResult AtualizarTutor(int id, [FromBody] AtualizaTutorDTO tutorDTO)
 	{
-		var tutor = _tutorRepository.PegarTutorPorId(id);
-		var tutorRequisicao = _mapper.Map(tutorDTO, tutor);
-		var tutorAtualizado = _tutorRepository.AtualizarTutor(id, tutorRequisicao);
-		if(tutorAtualizado == null) return NotFound();
-		return NoContent();
-	}
+        try
+        {
+            _service.AtualizarTutorPorId(id, tutorDTO);
+            return NoContent();
+        }
+        catch (HttpResponseException ex)
+        {
+            if(ex.StatusCode == 404)
+				return NotFound(new { Error = ex.Value }); 
+			return BadRequest(new { Error = ex.Message });
+
+        }
+        catch (System.Exception ex)
+        {
+            return BadRequest(new { Error = ex.Message});
+        }
+
+    }
 	[HttpDelete("{id}")]
 	public IActionResult DeletarTutor(int id)
 	{
-		_tutorRepository.DeletarTutor(id);
-		return NoContent();
+		try
+		{
+			_service.DeletarTutorPorId(id);
+            return NoContent();
+        }
+        catch (HttpResponseException ex)
+		{
+            if (ex.StatusCode == 404)
+				return NotFound(new { Error = ex.Value });
+			return BadRequest(new { Error = ex.Value });
+        }
+		
 	}
 }
