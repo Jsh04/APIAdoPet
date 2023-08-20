@@ -2,12 +2,14 @@
 using APIAdoPet.Domains.DTO.PetDTO;
 using APIAdoPet.Domains.Interfaces;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace APIAdoPet.Controllers;
 
 [ApiController]
 [Route("[Controller]")]
+[Authorize]
 public class PetController : ControllerBase
 {
     private readonly IPetRepository _petRepository;

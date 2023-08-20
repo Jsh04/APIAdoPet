@@ -14,5 +14,6 @@ public static class BootStrapper
         services.AddScoped<IAdocaoService, AdocaoService>();
         services.AddScoped<ITutorService, TutorService>();
         services.AddScoped<ILoginService, LoginService>();
+        services.AddScoped <ITokenService, TokenService>();
     }
 }

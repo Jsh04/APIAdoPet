@@ -32,8 +32,7 @@ public class TutorService : ITutorService
     {
         var usuario = RetornarUsuarioObj(tutorDTO);
         var tutor = _mapper.Map<Tutor>(tutorDTO);
-        tutor.Usuario = usuario;
-        
+        tutor.Usuario = usuario;   
         var resultado = await _userManager.CreateAsync(usuario, tutorDTO.Senha);
         _tutorRepository.CadastrarTutor(tutor);
         

@@ -5,5 +5,5 @@ namespace APIAdoPet.Services.Interfaces;
 
 public interface ILoginService
 {
-    Task<SignInResult> Login(LoginUsuarioDTO loginUsuarioDTO);
+    Task<string> Login(LoginUsuarioDTO loginUsuarioDTO);
 }

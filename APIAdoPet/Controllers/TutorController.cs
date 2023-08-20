@@ -7,12 +7,15 @@ using Microsoft.AspNetCore.Identity;
 using APIAdoPet.Services.Interfaces;
 using APIAdoPet.Exception;
 using System.Net;
+using Microsoft.AspNetCore.Authorization;
+using APIAdoPet.Domains.Enums;
 
 namespace APIAdoPet.Controllers;
 
 
 [ApiController]
 [Route("[controller]")]
+[Authorize(Roles = "Tutor", AuthenticationSchemes = "Bearer")]
 public class TutorController : ControllerBase
 {
 	private readonly ITutorService _service;
@@ -23,6 +26,7 @@ public class TutorController : ControllerBase
 	}
 
 	[HttpPost]
+	[AllowAnonymous]
 	public async Task<IActionResult> CadastrarTutor([FromBody] CadastrarTutorDTO tutorDto)
 	{
 		try
@@ -38,9 +42,9 @@ public class TutorController : ControllerBase
 	}
 
 	[HttpGet]
-	public IEnumerable<ListarTutorDTO> ListarTutores([FromQuery] int skip = 0, [FromQuery] int take = 10)
+	public IActionResult ListarTutores([FromQuery] int skip = 0, [FromQuery] int take = 10)
 	{
-		return _service.ListarTutores(skip, take);
+		return Ok(_service.ListarTutores(skip, take));
 	}
 
 	[HttpGet("{id}")]

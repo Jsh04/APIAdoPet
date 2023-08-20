@@ -1,5 +1,8 @@
 ﻿using APIAdoPet.Domains.DTO.LoginDTO;
+using APIAdoPet.Exception;
+using APIAdoPet.Services;
 using APIAdoPet.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace APIAdoPet.Controllers;
@@ -16,16 +19,15 @@ public class LoginController : ControllerBase
         _service = loginService;
     }
 
+    [AllowAnonymous]
     [HttpPost]
     public async Task<IActionResult> Login([FromBody] LoginUsuarioDTO usuarioDTO)
     {
-        var resultado = await _service.Login(usuarioDTO);
-        if (resultado.Succeeded) 
-        {
-            return Ok("Usuario autenticado com sucesso!");
-        }
-        return BadRequest();
+        
+            var token = await _service.Login(usuarioDTO);
+            return Ok(new
+            {
+                    Token = token
+            }); 
     }
-
-
 }

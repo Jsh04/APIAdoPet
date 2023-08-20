@@ -3,12 +3,14 @@ using APIAdoPet.Domains;
 using APIAdoPet.Domains.DTO.AbrigosDTO;
 using APIAdoPet.Domains.Interfaces;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace APIAdoPet.Controllers;
 
 [ApiController]
 [Route("[controller]")]
+[Authorize]
 public class AbrigoController : ControllerBase
 {
     private readonly IAbrigoRepository _abrigoRepository;

@@ -10,6 +10,7 @@ namespace APIAdoPet.Controllers;
 
 [ApiController]
 [Route("[controller]")]
+[Authorize]
 public class AdocaoController : ControllerBase
 {
     private readonly IAdocaoRepository _adocaoRepository;
@@ -24,6 +25,7 @@ public class AdocaoController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize(Roles = "Tutor")]
     public IActionResult CadastrarAdocao(CadastrarAdocaoDTO adocaoDTO)
     {
         Adocao adocao = _mapper.Map<Adocao>(adocaoDTO);
@@ -42,6 +44,7 @@ public class AdocaoController : ControllerBase
         return Ok(adocao);
     }
 
+    [Authorize(Roles = "Abrigo")]
     [HttpDelete("{id}")]
     public IActionResult DeletarAdocao(int id)
     {
