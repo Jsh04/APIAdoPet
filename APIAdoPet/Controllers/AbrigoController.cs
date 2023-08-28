@@ -10,7 +10,7 @@ namespace APIAdoPet.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-[Authorize]
+[Authorize(Roles ="Abrigo")]
 public class AbrigoController : ControllerBase
 {
     private readonly IAbrigoRepository _abrigoRepository;
@@ -24,6 +24,7 @@ public class AbrigoController : ControllerBase
     }
 
     [HttpPost]
+    [AllowAnonymous]
     public IActionResult CadastrarAbrigo([FromBody] CadastrarAbrigoDTO abrigoDTO)
     {
         var abrigo = _mapper.Map<Abrigo>(abrigoDTO);

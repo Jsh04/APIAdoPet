@@ -9,7 +9,7 @@ namespace APIAdoPet.Controllers;
 
 [ApiController]
 [Route("[Controller]")]
-[Authorize]
+[Authorize(Roles = "Abrigo")]
 public class PetController : ControllerBase
 {
     private readonly IPetRepository _petRepository;
@@ -22,6 +22,7 @@ public class PetController : ControllerBase
     }
 
     [HttpGet]
+    [Authorize(Roles = "Abrigo, Tutor")]
     public IActionResult ListarPets(int skip = 0, int take = 10)
     {
         var pets = _petRepository.ListarPets(skip, take);
@@ -29,6 +30,7 @@ public class PetController : ControllerBase
     }
 
     [HttpPost]
+    
     public IActionResult CadastrarPet([FromBody] CadastrarPetDTO petDTO)
     {
         var pet = _mapper.Map<Pet>(petDTO);

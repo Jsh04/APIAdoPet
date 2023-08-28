@@ -6,7 +6,7 @@ namespace APIAdoPet.Services.Interfaces;
 
 public interface ITutorService
 {
-    Task<Tutor> CadastrarTutor(CadastrarTutorDTO tutorDTO);
+    Task<ListarTutorDTO> CadastrarTutor(CadastrarTutorDTO tutorDTO);
     IEnumerable<ListarTutorDTO> ListarTutores(int skip, int take);
     ListarTutorDTO PegarTutorPorId(int id);
     void AtualizarTutorPorId(int id, AtualizaTutorDTO tutorDTO);
