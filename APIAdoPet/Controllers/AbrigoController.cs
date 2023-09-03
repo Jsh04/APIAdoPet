@@ -10,7 +10,7 @@ namespace APIAdoPet.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-[Authorize]
+[Authorize(Roles = "Abrigo", AuthenticationSchemes = "Bearer")]
 public class AbrigoController : ControllerBase
 {
     private readonly IAbrigoRepository _abrigoRepository;
@@ -46,16 +46,6 @@ public class AbrigoController : ControllerBase
     {
         return _mapper.Map<List<DadosDetalhamentoAbrigo>>(_abrigoRepository.ListarAbrigo(skip, take));
 
-    }
-
-    [HttpPut("{id}")]
-    public IActionResult AtualizarAbrigo(int id, AtualizaAbrigoDTO abrigoDTO)
-    {
-        var abrigo = _abrigoRepository.PegarAbrigoPorId(id);
-        var abrigoRequisicao = _mapper.Map(abrigoDTO, abrigo);
-        var abrigoAtuzalizado = _abrigoRepository.AtualizarAbrigo(id, abrigoRequisicao);
-        if (abrigoAtuzalizado == null) return NotFound();
-        return Ok(abrigoAtuzalizado);
     }
 
     [HttpPut("{id}")]

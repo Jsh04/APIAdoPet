@@ -1,14 +1,8 @@
 ﻿using APIAdoPet.Domains.DTO.TutorDTO;
-using APIAdoPet.Domains;
-using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using APIAdoPet.Domains.Interfaces;
-using Microsoft.AspNetCore.Identity;
 using APIAdoPet.Services.Interfaces;
 using APIAdoPet.Exception;
-using System.Net;
 using Microsoft.AspNetCore.Authorization;
-using APIAdoPet.Domains.Enums;
 
 namespace APIAdoPet.Controllers;
 

@@ -22,6 +22,7 @@ public class PetController : ControllerBase
     }
 
     [HttpGet]
+    
     public IActionResult ListarPets(int skip = 0, int take = 10)
     {
         var pets = _petRepository.ListarPets(skip, take);
@@ -29,6 +30,7 @@ public class PetController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize(Roles = "Abrigo", AuthenticationSchemes = "Bearer")]
     public IActionResult CadastrarPet([FromBody] CadastrarPetDTO petDTO)
     {
         var pet = _mapper.Map<Pet>(petDTO);
@@ -45,6 +47,7 @@ public class PetController : ControllerBase
     }
 
     [HttpPut("{id}")]
+    [Authorize(Roles = "Abrigo", AuthenticationSchemes = "Bearer")]
     public IActionResult AtualizarPet(int id, AtualizarPetDTO petDTO)
     {
         var pet = _petRepository.PegarPetPorId(id);
@@ -54,6 +57,7 @@ public class PetController : ControllerBase
         return NoContent();
     }
     [HttpDelete("{id}")]
+    [Authorize(Roles = "Abrigo", AuthenticationSchemes = "Bearer")]
     public IActionResult DeletarPet(int id)
     {
         try

@@ -62,7 +62,8 @@ public class TutorService : ITutorService
     public void AtualizarTutorPorId(int id, AtualizaTutorDTO tutorDTO)
     {
         var tutor = _tutorRepository.PegarTutorPorId(id);
-        if (tutor == null) throw new HttpResponseException(404, "Tutor não encontrado");
+        if (tutor == null) 
+            throw new HttpResponseException(404, "Tutor não encontrado");
         var tutorRequisicao = _mapper.Map(tutorDTO, tutor);
         _tutorRepository.AtualizarTutor(id, tutorRequisicao);
     }
