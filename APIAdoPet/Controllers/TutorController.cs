@@ -26,7 +26,7 @@ public class TutorController : ControllerBase
 		try
 		{
             var tutor = await _service.CadastrarTutor(tutorDto);
-
+			
             return CreatedAtAction(nameof(PegarTutorPorId), new { id = tutor.Id }, tutor);
         }
         catch(HttpResponseException ex)

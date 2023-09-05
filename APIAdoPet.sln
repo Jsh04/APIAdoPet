@@ -5,6 +5,8 @@ VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APIAdoPet", "APIAdoPet\APIAdoPet.csproj", "{435A4720-A448-4DE3-858A-2BC9985DDABD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TesteUnitariosAPIAdopet", "TesteUnitariosAPIAdopet\TesteUnitariosAPIAdopet.csproj", "{A37136F8-8957-4833-A0F6-BADB661F037C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{435A4720-A448-4DE3-858A-2BC9985DDABD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{435A4720-A448-4DE3-858A-2BC9985DDABD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{435A4720-A448-4DE3-858A-2BC9985DDABD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A37136F8-8957-4833-A0F6-BADB661F037C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A37136F8-8957-4833-A0F6-BADB661F037C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A37136F8-8957-4833-A0F6-BADB661F037C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A37136F8-8957-4833-A0F6-BADB661F037C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

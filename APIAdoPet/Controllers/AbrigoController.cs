@@ -24,6 +24,7 @@ public class AbrigoController : ControllerBase
     }
 
     [HttpPost]
+    [AllowAnonymous]
     public IActionResult CadastrarAbrigo([FromBody] CadastrarAbrigoDTO abrigoDTO)
     {
         var abrigo = _mapper.Map<Abrigo>(abrigoDTO);

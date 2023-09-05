@@ -7,6 +7,7 @@ using APIAdoPet.Services.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using System.Net;
+using System.Text.RegularExpressions;
 
 namespace APIAdoPet.Services;
 
@@ -28,7 +29,7 @@ public class TutorService : ITutorService
         _mapper = mapper;
     }
 
-    public async Task<Tutor> CadastrarTutor(CadastrarTutorDTO tutorDTO)
+    public async Task<ListarTutorDTO> CadastrarTutor(CadastrarTutorDTO tutorDTO)
     {
         var usuario = RetornarUsuarioObj(tutorDTO);
         var tutor = _mapper.Map<Tutor>(tutorDTO);
@@ -41,7 +42,8 @@ public class TutorService : ITutorService
         if (!resultado.Succeeded)
             throw new System.Exception("Credencias Inválidas");
         await _userManager.AddToRoleAsync(usuario, Roles.Tutor.ToString());
-        return tutor;
+        var tutorDTOCriado = _mapper.Map<ListarTutorDTO>(tutor);
+        return tutorDTOCriado;
     }
 
     public IEnumerable<ListarTutorDTO> ListarTutores(int skip, int take)
@@ -82,9 +84,11 @@ public class TutorService : ITutorService
 
     private static Usuario RetornarUsuarioObj(CadastrarTutorDTO tutorDTO)
     {
+
+        var nomeFormatado = RetirarCaracteresEspecias(tutorDTO.Nome);
         return new Usuario()
         {
-            UserName = tutorDTO.Nome.Replace(" ", ""),
+            UserName = nomeFormatado.Replace(" ", ""),
             Email = tutorDTO.Email,
 
         }; ;
@@ -93,5 +97,14 @@ public class TutorService : ITutorService
     {
         if(await _roleManager.FindByNameAsync(roleName) == null)
             await _roleManager.CreateAsync(new IdentityRole(roleName));
+    }
+
+    private static string RetirarCaracteresEspecias(string textoFormatar)
+    {
+        string ret = string.Empty;
+        string pattern = @"(?i)[^0-9a-záéíóúàèìòùâêîôûãõç\\s]";
+        Regex regex = new(pattern);
+        ret = regex.Replace(textoFormatar, ret);
+        return ret;
     }
 }

@@ -32,7 +32,7 @@ public static class SecurityDataConfiguration
             opts.Password.RequireNonAlphanumeric = false;
             opts.Password.RequireUppercase = false;
             opts.User.RequireUniqueEmail = true;
-            opts.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            opts.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789áéíóúàèìòùâêîôûãõç";
         });
     }
     public static void AdicionarAuthentication(this IServiceCollection services)
