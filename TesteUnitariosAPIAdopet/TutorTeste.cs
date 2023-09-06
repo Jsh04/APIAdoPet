@@ -60,6 +60,29 @@ public class TutorTeste : IClassFixture<TestDatabaseFixture>
         
     }
 
+    [Theory(Skip = "Teste passando")]
+    [InlineData(1)]
+    [InlineData(2)]
+    public void TestaDeletarTutor(int id)
+    {
+        _repository.DeletarTutor(id);
+        var tutorDeletado = _repository.PegarTutorPorId(id);
+
+        Assert.Null(tutorDeletado);
+    }
+
+    [Fact]
+    public void TestaAtualizaTutorPeloId() 
+    {
+        int id = 4;
+        var tutor = _repository.PegarTutorPorId(id);
+        string telefone = "16523235";
+        tutor.Telefone = telefone;
+        var tutorAtualizado  = _repository.AtualizarTutor(id, tutor);
+        Assert.Equal(telefone, tutorAtualizado.Telefone);
+
+    }
+
     private string EncoderPassword(string password)
     {
         byte[] salt = RandomNumberGenerator.GetBytes(128 / 8);
