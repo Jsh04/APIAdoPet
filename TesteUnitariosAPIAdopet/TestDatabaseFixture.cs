@@ -11,7 +11,7 @@ namespace TesteUnitariosAPIAdopet;
 
 public class TestDatabaseFixture
 {
-    private const string ConnectionString = "server=localhost;port=3306;database=adopet;user=root;password=root;";
+    private const string ConnectionString = "server=localhost;port=3306;database=adopet_test;user=root;password=root;";
     private static readonly object _lock = new();
     private static bool _databaseInitialized;
 
@@ -24,9 +24,7 @@ public class TestDatabaseFixture
                 using (var context = CreateContext())
                 {
                     context.Database.EnsureCreated();
-               
                 }
-
                 _databaseInitialized = true;
             }
         }

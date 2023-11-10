@@ -23,7 +23,6 @@ public class LoginController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Login([FromBody] LoginUsuarioDTO usuarioDTO)
     {
-        
             var token = await _service.Login(usuarioDTO);
             return Ok(new
             {

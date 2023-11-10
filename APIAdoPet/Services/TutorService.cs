@@ -4,6 +4,7 @@ using APIAdoPet.Domains.Enums;
 using APIAdoPet.Domains.Interfaces;
 using APIAdoPet.Exception;
 using APIAdoPet.Services.Interfaces;
+using APIAdoPet.Utils;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using System.Net;
@@ -21,7 +22,11 @@ public class TutorService : ITutorService
 
     private readonly IMapper _mapper;
 
-    public TutorService(ITutorRepository tutorRepository, IMapper mapper, RoleManager<IdentityRole> roleManager,UserManager<Usuario> userManager)
+    public TutorService(ITutorRepository tutorRepository, 
+        IMapper mapper, 
+        RoleManager<IdentityRole> roleManager,
+        UserManager<Usuario> userManager
+        )
     {
         _tutorRepository = tutorRepository;
         _roleManager = roleManager;
@@ -85,10 +90,10 @@ public class TutorService : ITutorService
     private static Usuario RetornarUsuarioObj(CadastrarTutorDTO tutorDTO)
     {
 
-        var nomeFormatado = RetirarCaracteresEspecias(tutorDTO.Nome);
+        var nomeFormatado = FormatUtil.RetirarCaracteresEspecias(tutorDTO.Nome);
         return new Usuario()
         {
-            UserName = nomeFormatado.Replace(" ", ""),
+            UserName = nomeFormatado.Replace(" ", "_"),
             Email = tutorDTO.Email,
 
         }; ;
@@ -99,12 +104,5 @@ public class TutorService : ITutorService
             await _roleManager.CreateAsync(new IdentityRole(roleName));
     }
 
-    private static string RetirarCaracteresEspecias(string textoFormatar)
-    {
-        string ret = string.Empty;
-        string pattern = @"(?i)[^0-9a-záéíóúàèìòùâêîôûãõç\\s]";
-        Regex regex = new(pattern);
-        ret = regex.Replace(textoFormatar, ret);
-        return ret;
-    }
+    
 }

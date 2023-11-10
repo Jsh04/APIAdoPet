@@ -27,9 +27,13 @@ builder.Services.AddControllers(options =>
 {
     options.Filters.Add<HttpResponseExceptionFilter>();
 });
-
 var app = builder.Build();
 
+app.UseCors(x => x
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .AllowCredentials()
+            .SetIsOriginAllowed(origin => true));
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/error");
