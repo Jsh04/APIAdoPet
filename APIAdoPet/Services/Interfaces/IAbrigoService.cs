@@ -5,5 +5,5 @@ namespace APIAdoPet.Services.Interfaces;
 
 public interface IAbrigoService
 {
-    Task<Abrigo> CadastrarAbrigoDTO(CadastrarAbrigoDTO abrigoDTO);
+    Task<DadosDetalhamentoAbrigo> CadastrarAbrigo(CadastrarAbrigoDTO abrigoDTO);
 }

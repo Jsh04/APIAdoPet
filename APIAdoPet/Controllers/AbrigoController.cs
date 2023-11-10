@@ -2,6 +2,7 @@
 using APIAdoPet.Domains;
 using APIAdoPet.Domains.DTO.AbrigosDTO;
 using APIAdoPet.Domains.Interfaces;
+using APIAdoPet.Services.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -15,20 +16,21 @@ public class AbrigoController : ControllerBase
 {
     private readonly IAbrigoRepository _abrigoRepository;
     private readonly IMapper _mapper;
+    private readonly IAbrigoService _abrigoService;
 
-    public AbrigoController(IMapper mapper, IAbrigoRepository abrigoRepository)
+    public AbrigoController(IMapper mapper, IAbrigoRepository abrigoRepository, IAbrigoService abrigoService)
     {
         _abrigoRepository = abrigoRepository;
         _mapper = mapper;
-        _abrigoRepository = abrigoRepository;
+        _abrigoService = abrigoService;
     }
 
     [HttpPost]
     [AllowAnonymous]
-    public IActionResult CadastrarAbrigo([FromBody] CadastrarAbrigoDTO abrigoDTO)
+    public async Task<IActionResult> CadastrarAbrigo([FromBody] CadastrarAbrigoDTO abrigoDTO)
     {
-        var abrigo = _mapper.Map<Abrigo>(abrigoDTO);
-        _abrigoRepository.CadastrarAbrigo(abrigo);
+        var abrigo = await _abrigoService.CadastrarAbrigo(abrigoDTO);
+
         return CreatedAtAction(nameof(PegarAbrigoPorId), new { id = abrigo.Id }, abrigo);
     }
 

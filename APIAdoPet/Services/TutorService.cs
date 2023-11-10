@@ -40,12 +40,10 @@ public class TutorService : ITutorService
         var tutor = _mapper.Map<Tutor>(tutorDTO);
         tutor.Usuario = usuario;   
         var resultado = await _userManager.CreateAsync(usuario, tutorDTO.Senha);
-        _tutorRepository.CadastrarTutor(tutor);
-        
-        await CriarRole(Roles.Tutor.ToString());
-
         if (!resultado.Succeeded)
             throw new System.Exception("Credencias Inválidas");
+        await CriarRole(Roles.Tutor.ToString());
+        _tutorRepository.CadastrarTutor(tutor);
         await _userManager.AddToRoleAsync(usuario, Roles.Tutor.ToString());
         var tutorDTOCriado = _mapper.Map<ListarTutorDTO>(tutor);
         return tutorDTOCriado;
