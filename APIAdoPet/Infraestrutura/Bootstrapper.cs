@@ -3,7 +3,6 @@ using APIAdoPet.Domains.Interfaces;
 using APIAdoPet.Infraestrutura.Repository;
 using Microsoft.EntityFrameworkCore;
 namespace APIAdoPet.Infraestrutura;
-
 public static class Bootstrapper
 {
     public static void AdicionarInfraestrutura(this IServiceCollection services, IConfiguration configuration)

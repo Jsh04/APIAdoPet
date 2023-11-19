@@ -8,4 +8,5 @@ public interface IPetRepository
     IEnumerable<Pet> ListarPets(int skip, int take);
     Pet PegarPetPorId(int id);
     Pet PegarPetPeloNome(string nome);
+    IEnumerable<Pet> ListarPetsPorAbrigoId(string abrigoId, int skip, int take);
 }

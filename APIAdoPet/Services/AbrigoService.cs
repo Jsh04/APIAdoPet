@@ -37,11 +37,15 @@ public class AbrigoService : IAbrigoService
 
         if (!resultado.Succeeded)
             throw new System.Exception("Credencias inválidas");
+
         await CriarRole(Roles.Abrigo.ToString());
+
         _abrigoRepository.CadastrarAbrigo(abrigo);
+
         await _userManager.AddToRoleAsync(usuario, Roles.Abrigo.ToString());
-        var tutorDTOCriado = _mapper.Map<DadosDetalhamentoAbrigo>(abrigo);
-        return tutorDTOCriado;
+
+        var dadosDetalhamentoAbrigo = _mapper.Map<DadosDetalhamentoAbrigo>(abrigo);
+        return dadosDetalhamentoAbrigo;
 
     }
 

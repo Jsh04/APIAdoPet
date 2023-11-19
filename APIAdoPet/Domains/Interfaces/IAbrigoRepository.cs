@@ -7,4 +7,5 @@ public interface IAbrigoRepository
     Abrigo AtualizarAbrigo(int id, Abrigo abrigo);
     IEnumerable<Abrigo> ListarAbrigo(int skip, int take);
     Abrigo PegarAbrigoPorId(int id);
+    Abrigo PegarAbrigoPorIdUser(string id);
 }

@@ -36,7 +36,7 @@ public class AbrigoRepository : IAbrigoRepository
             _context.SaveChanges();
             return;
         }
-        throw new System.Exception("Tutor não encontrado");
+        throw new System.Exception("Abrigo não encontrado");
     }
 
     public IEnumerable<Abrigo> ListarAbrigo(int skip = 0, int take = 10)
@@ -45,8 +45,6 @@ public class AbrigoRepository : IAbrigoRepository
         return abrigos.ToList();
     }
 
-
-
     public Abrigo PegarAbrigoPorId(int id)
     {
         var abrigo = _context.Abrigo.FirstOrDefault(abrigo => abrigo.Id == id);
@@ -54,6 +52,15 @@ public class AbrigoRepository : IAbrigoRepository
         {
             return abrigo;
         }
-        throw new System.Exception("Tutor não encontrado");
+        throw new System.Exception("Abrigo não encontrado");
+    }
+
+    public Abrigo PegarAbrigoPorIdUser(string id)
+    {
+        var abrigo = _context.Abrigo.FirstOrDefault(abrigo => abrigo.Usuario.Id ==  id);
+        if (abrigo != null)
+            return abrigo;
+        
+        throw new System.Exception("Abrigo não encontrado");
     }
 }

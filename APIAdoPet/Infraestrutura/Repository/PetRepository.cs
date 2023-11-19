@@ -39,7 +39,7 @@ public class PetRepository : IPetRepository
 
     public IEnumerable<Pet> ListarPets(int skip, int take)
     {
-        return _context.Pets.Skip(skip).Take(take).Where(pet => pet.Adotado == false).ToList();
+        return _context.Pets.Skip(skip).Take(take).Where(pet => !pet.Adotado).ToList();
     }
 
     public Pet PegarPetPorId(int id)
@@ -54,5 +54,15 @@ public class PetRepository : IPetRepository
        var pet = _context.Pets.FirstOrDefault(pet => pet.Nome.Equals(nome));
         if (pet == null) throw new System.Exception("Pet Não encontrado");
         return pet;
+    }
+
+    public IEnumerable<Pet> ListarPetsPorAbrigoId(string abrigoId, int skip, int take)
+    {
+        var abrigo = _context.Abrigo.FirstOrDefault(abrigo => abrigo.Usuario.Id == abrigoId);
+        if (abrigo == null)
+            throw new System.Exception("Abrigo não encontrado");
+            
+        var petsPorAbrigo = _context.Pets.Where(pet => pet.AbrigoId == abrigo.Id).Skip(skip).Take(take).ToList();
+        return petsPorAbrigo;
     }
 }

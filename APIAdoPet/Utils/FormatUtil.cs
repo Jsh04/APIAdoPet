@@ -1,10 +1,15 @@
-﻿namespace APIAdoPet.Utils
+﻿using System.Text.RegularExpressions;
+
+namespace APIAdoPet.Utils;
+
+public static class FormatUtil
 {
-    public class FormatUtil
+    public static string RetirarCaracteresEspecias(string textoFormatar)
     {
-        public static string RetirarCaracteresEspecias(string nome)
-        {
-            return nome;
-        }
+        string ret = string.Empty;
+        string pattern = @"(?i)[^0-9a-záéíóúàèìòùâêîôûãõç\\s]";
+        Regex regex = new(pattern);
+        ret = regex.Replace(textoFormatar, ret);
+        return ret;
     }
 }
