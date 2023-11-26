@@ -20,6 +20,6 @@ public class AtualizarPetDTO
     [Required]
     public string Imagem { get; set; }
     [Required]
-    [JsonPropertyName("abrigos_id")]
-    public int AbrigoId { get; set; }
+    [JsonPropertyName("abrigoId")]
+    public string AbrigoIdUser { get; set; }
 }

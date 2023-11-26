@@ -17,6 +17,8 @@ public class ListarPetDTO
 
     public Endereco Endereco { get; set; }
 
+    public Abrigo Abrigo { get; set; }
+
     public string Imagem { get; set; }
     [JsonPropertyName("abrigos_id")]
     public int AbrigoId { get; set; }

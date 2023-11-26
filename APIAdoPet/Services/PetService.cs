@@ -30,4 +30,14 @@ public class PetService : IPetService
             throw new System.Exception("Erro ao cadastrar pet");
         return petCriado;
     }
+
+    public Pet AtualizarPet(int id, AtualizarPetDTO atualizarPetDTO)
+    {
+        var pet = _petRepository.PegarPetPorId(id);
+        var abrigo = _abrigoRepository.PegarAbrigoPorIdUser(atualizarPetDTO.AbrigoIdUser);
+        var petRequisicao = _mapper.Map(atualizarPetDTO, pet);
+        petRequisicao.AbrigoId = abrigo.Id;
+        var petAtualizado = _petRepository.AtualizarPet(id, petRequisicao);
+        return petAtualizado;
+    }
 }

@@ -10,7 +10,7 @@ namespace APIAdoPet.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-[Authorize(Roles = "Abrigo", AuthenticationSchemes = "Bearer")]
+[Authorize(AuthenticationSchemes = "Bearer")]
 public class PetController : ControllerBase
 {
     private readonly IPetRepository _petRepository;
@@ -24,7 +24,7 @@ public class PetController : ControllerBase
     }
 
     [HttpGet]
-    [Authorize(Roles = "Abrigo, Tutor")]
+    [Authorize]
     public IActionResult ListarPets(int skip = 0, int take = 10)
     {
         var pets = _petRepository.ListarPets(skip, take);
@@ -32,6 +32,7 @@ public class PetController : ControllerBase
     }
 
     [HttpGet("pets-disponiveis/{abrigoId}")]
+    [Authorize("Abrigo")]
     public IActionResult ListarPetaPorAbrigoId(string abrigoId, [FromQuery] int skip = 0, [FromQuery] int take = 10)
     {
        var pets = _petRepository.ListarPetsPorAbrigoId(abrigoId, skip, take);
@@ -39,6 +40,7 @@ public class PetController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize("Abrigo")]
     public IActionResult CadastrarPet([FromBody] CadastrarPetDTO petDTO)
     {
         var petCriado = _petService.CadastrarPet(petDTO);
@@ -47,6 +49,7 @@ public class PetController : ControllerBase
     
 
     [HttpGet("{id}")]
+    [Authorize("Abrigo")]
     public IActionResult PegarPetPorId(int id)
     {
         var pet = _petRepository.PegarPetPorId(id);
@@ -54,24 +57,23 @@ public class PetController : ControllerBase
     }
 
     [HttpPut("{id}")]
+    [Authorize("Abrigo")]
     public IActionResult AtualizarPet(int id, AtualizarPetDTO petDTO)
     {
-        var pet = _petRepository.PegarPetPorId(id);
-        var petRequisicao = _mapper.Map(petDTO, pet);
-        var petAtualizado  = _petRepository.AtualizarPet(id, petRequisicao);
+        var petAtualizado = _petService.AtualizarPet(id, petDTO);
         if (petAtualizado == null) return BadRequest();
         return NoContent();
     }
     [HttpDelete("{id}")]
+    [Authorize("Abrigo")]
     public IActionResult DeletarPet(int id)
     {
         try
         {
             _petRepository.DeletarPet(id);
             return NoContent();
-
         }
-        catch (System.Exception e)
+        catch (System.Exception)
         {
             return BadRequest("Pet não encontrado");
         }

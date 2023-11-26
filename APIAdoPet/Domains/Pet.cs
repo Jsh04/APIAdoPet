@@ -21,6 +21,7 @@ public class Pet
     public string Imagem { get; set; }
     [Required]
     public int AbrigoId { get; set; }
+
     public virtual Abrigo Abrigo { get; set; }
 
     public void FoiAdotado()

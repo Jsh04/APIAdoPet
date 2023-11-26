@@ -2,6 +2,7 @@
 using APIAdoPet.Domains.Interfaces;
 using APIAdoPet.Infraestrutura.Data;
 using Microsoft.CSharp.RuntimeBinder;
+using Microsoft.EntityFrameworkCore;
 using System.Runtime.ExceptionServices;
 
 namespace APIAdoPet.Infraestrutura.Repository;
@@ -39,7 +40,7 @@ public class PetRepository : IPetRepository
 
     public IEnumerable<Pet> ListarPets(int skip, int take)
     {
-        return _context.Pets.Skip(skip).Take(take).Where(pet => !pet.Adotado).ToList();
+        return _context.Pets.Include(pet => pet.Abrigo).Skip(skip).Take(take).Where(pet => !pet.Adotado).ToList();
     }
 
     public Pet PegarPetPorId(int id)
