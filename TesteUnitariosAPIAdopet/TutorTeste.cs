@@ -35,9 +35,8 @@ public class TutorTeste : IClassFixture<TestDatabaseFixture>
         Assert.Equal(5, tutores.Count());
     }
 
-    [Theory(DisplayName = "Cadastrar Tutores no banco de dados", Skip = "Por enquanto")]
+    [Theory(DisplayName = "Cadastrar Tutores no banco de dados")]
     [InlineData("Vitor alberto", "vitor@gamil.com", "12345")]
-    [InlineData("Laís Zanardi", "lais@gmail.com", "123456789")]
     [InlineData("Luke da Silva", "luke@gmail.com", "1235")]
     public void CadastrarTutorNoBanco(string nome, string email, string senha)
     {

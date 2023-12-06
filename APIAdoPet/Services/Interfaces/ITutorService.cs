@@ -11,4 +11,5 @@ public interface ITutorService
     ListarTutorDTO PegarTutorPorId(int id);
     void AtualizarTutorPorId(int id, AtualizaTutorDTO tutorDTO);
     void DeletarTutorPorId(int id);
+    Tutor PegarTutorPeloIdUser(string id);
 }

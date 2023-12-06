@@ -22,7 +22,8 @@ public class TutorService : ITutorService
 
     private readonly IMapper _mapper;
 
-    public TutorService(ITutorRepository tutorRepository, 
+    public TutorService(
+        ITutorRepository tutorRepository, 
         IMapper mapper, 
         RoleManager<IdentityRole> roleManager,
         UserManager<Usuario> userManager
@@ -102,5 +103,9 @@ public class TutorService : ITutorService
             await _roleManager.CreateAsync(new IdentityRole(roleName));
     }
 
-    
+    public Tutor PegarTutorPeloIdUser(string id)
+    {
+        var tutor = _tutorRepository.PegarTutorPorIdUser(id);
+        return tutor;
+    }
 }

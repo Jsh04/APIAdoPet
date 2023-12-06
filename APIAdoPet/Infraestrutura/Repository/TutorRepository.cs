@@ -55,5 +55,15 @@ namespace APIAdoPet.Infraestrutura.Repository
             }
             return null;
         }
+
+        public Tutor PegarTutorPorIdUser(string id)
+        {
+            var tutor = _context.Tutores.FirstOrDefault(tutor => tutor.Usuario.Id == id);
+            if (tutor == null)
+                throw new System.Exception("Tutor não encontrado");
+            return tutor;
+                
+            
+        }
     }
 }

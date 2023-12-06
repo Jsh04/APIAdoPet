@@ -6,4 +6,5 @@ public interface ITutorRepository
     Tutor AtualizarTutor(int id, Tutor tutor);
     IEnumerable<Tutor> ListarTutor(int skip, int take);
     Tutor PegarTutorPorId(int id);
+    Tutor PegarTutorPorIdUser(string id);
 }

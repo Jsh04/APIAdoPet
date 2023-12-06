@@ -57,7 +57,6 @@ public class AbrigoService : IAbrigoService
 
     private Usuario RetornarUsuarioObj(CadastrarAbrigoDTO abrigoDTO)
     {
-
         var nomeFormatado = FormatUtil.RetirarCaracteresEspecias(abrigoDTO.Name);
         return new Usuario()
         {

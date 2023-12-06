@@ -10,34 +10,31 @@ namespace APIAdoPet.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-[Authorize]
+[Authorize (AuthenticationSchemes = "Bearer")]
 public class AdocaoController : ControllerBase
 {
     private readonly IAdocaoRepository _adocaoRepository;
     private readonly IAdocaoService _adocaoService;
-    private readonly IMapper _mapper;
+    private readonly IPetService _petService;
 
-    public AdocaoController(IAdocaoRepository adocaoRepository, IMapper mapper, IAdocaoService adocaoService)
+    public AdocaoController(IAdocaoRepository adocaoRepository, IMapper mapper, 
+        IAdocaoService adocaoService, IPetService petService)
     {
         _adocaoService = adocaoService;
         _adocaoRepository = adocaoRepository;
-        _mapper = mapper;
+        _petService = petService;
     }
 
     [HttpPost]
     [Authorize(Roles = "Tutor")]
     public IActionResult CadastrarAdocao(CadastrarAdocaoDTO adocaoDTO)
     {
-        Adocao adocao = _mapper.Map<Adocao>(adocaoDTO);
-        Pet pet = _adocaoService.EncontrarPetPeloNome(adocaoDTO.NomePet);
-        adocao.PetId = pet.Id;
-        pet.FoiAdotado();
-        var adocaoCadastrado = _adocaoRepository.CadastrarAdocao(adocao);
-        var dadosRetorno = _mapper.Map<DadosDetalhamentoAdocaoDTO>(adocao);
-        return CreatedAtAction(nameof(PegarAdocaoPorId), new { id = adocao.Id }, dadosRetorno);
+        var dadosRetorno = _adocaoService.CadastrarAdocao(adocaoDTO);
+        return CreatedAtAction(nameof(PegarAdocaoPorId), new { id = dadosRetorno.Id }, dadosRetorno);
     }
 
     [HttpGet("{id}")]
+    [Authorize]
     public IActionResult PegarAdocaoPorId(int id)
     {
         var adocao = _adocaoRepository.PegarAdocaoPorId(id);

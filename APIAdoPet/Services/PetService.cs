@@ -31,6 +31,12 @@ public class PetService : IPetService
         return petCriado;
     }
 
+    public Pet PegarPetPorId(int id)
+    {
+        var pet = _petRepository.PegarPetPorId(id);
+        return pet;
+    }
+
     public Pet AtualizarPet(int id, AtualizarPetDTO atualizarPetDTO)
     {
         var pet = _petRepository.PegarPetPorId(id);
@@ -39,5 +45,11 @@ public class PetService : IPetService
         petRequisicao.AbrigoId = abrigo.Id;
         var petAtualizado = _petRepository.AtualizarPet(id, petRequisicao);
         return petAtualizado;
+    }
+
+    public Pet PegarPetPeloNome(string nome)
+    {
+        var pet = _petRepository.PegarPetPeloNome(nome);
+        return pet;
     }
 }

@@ -7,4 +7,6 @@ public interface IPetService
 {
     Pet CadastrarPet(CadastrarPetDTO cadastrarPetDTO);
     Pet AtualizarPet(int id, AtualizarPetDTO atualizarPetDTO);
+    Pet PegarPetPorId(int id);
+    Pet PegarPetPeloNome(string nome);
 }

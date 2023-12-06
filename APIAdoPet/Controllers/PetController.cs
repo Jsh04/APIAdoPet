@@ -32,7 +32,7 @@ public class PetController : ControllerBase
     }
 
     [HttpGet("pets-disponiveis/{abrigoId}")]
-    [Authorize("Abrigo")]
+    [Authorize(Roles = "Abrigo")]
     public IActionResult ListarPetaPorAbrigoId(string abrigoId, [FromQuery] int skip = 0, [FromQuery] int take = 10)
     {
        var pets = _petRepository.ListarPetsPorAbrigoId(abrigoId, skip, take);
@@ -40,7 +40,7 @@ public class PetController : ControllerBase
     }
 
     [HttpPost]
-    [Authorize("Abrigo")]
+    [Authorize(Roles = "Abrigo")]
     public IActionResult CadastrarPet([FromBody] CadastrarPetDTO petDTO)
     {
         var petCriado = _petService.CadastrarPet(petDTO);
@@ -57,7 +57,7 @@ public class PetController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    [Authorize("Abrigo")]
+    [Authorize(Roles = "Abrigo")]
     public IActionResult AtualizarPet(int id, AtualizarPetDTO petDTO)
     {
         var petAtualizado = _petService.AtualizarPet(id, petDTO);
@@ -65,7 +65,7 @@ public class PetController : ControllerBase
         return NoContent();
     }
     [HttpDelete("{id}")]
-    [Authorize("Abrigo")]
+    [Authorize(Roles = "Abrigo")]
     public IActionResult DeletarPet(int id)
     {
         try
